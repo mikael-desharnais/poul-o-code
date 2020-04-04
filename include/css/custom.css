@@ -49,9 +49,5 @@
 }
 #init-tab,#step-tab,.CodeMirror{
     width : 100%;
-    height : 100%;
-}
-#step-tab{
-    width : 100%;
-    height : 100%;
+    height : 95%;
 }
