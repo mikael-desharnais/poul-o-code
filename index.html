@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="include/css/simple-line-icons.css">
+        <link rel="stylesheet" href="include/css/bootstrap.min.css">
+        <link rel="stylesheet" href="include/css/codemirror.css">
+        <link rel="stylesheet" href="include/css/custom.css">
+        <script src="include/js/jquery-3.4.1.min.js"></script>
+        <script src="include/js/bootstrap.min.js"></script>
+        <script src="include/js/codemirror.js"></script>
+        <script src="include/js/codemirror/javascript.js"></script>
+        <script src="include/js/internal-code.js"></script>
+        <script src="include/js/code.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col block block-top">
+                    <div class="block-title">
+                        <button type="button" class="btn btn-primary btn-sm">Affichage</button>
+                    </div>
+                    <div class="block-display">
+                    </div>
+                </div>
+                <div class="col block block-top">
+                    <div class="block-title">
+                        <button type="button" class="btn btn-light btn-sm">Code</button>
+                        <button type="button" class="btn btn-success btn-sm" id="run"><i class="icon-control-play"></i> Démarrer</button>
+                        <button type="button" class="btn btn-danger btn-sm" id="stop" style="display : none;"><i class="icon-control-pause"></i> Stop</button>
+                    </div>
+                    <div class="block-code">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" aria-controls="init-tab" href="#init-tab">Début</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" aria-controls="step-tab" href="#step-tab">Répétition</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="code-tabs">
+                            <div class="tab-pane fade show active" id="init-tab" role="tabpanel" aria-labelledby="init-tab">
+                                <textarea id="init" class="code"></textarea>
+                            </div>
+                            <div class="tab-pane fade" id="step-tab" role="tabpanel" aria-labelledby="step-tab">
+                                <textarea id="step" class="code"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col block block-bottom">
+                    <div class="block-title">
+                        <button type="button" class="btn btn-warning btn-sm">Débug</button><button type="button" class="btn btn-light btn-sm" id="clear-log">Vider</button>
+                    </div>
+                    <div class="block-log">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
