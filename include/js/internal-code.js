@@ -25,9 +25,17 @@ function run(){
     creerValeur("TOUCHE",TOUCHE.aucune)
     var initCode = jQuery("#init").val()
     var stepCode = jQuery("#step").val()
-    eval(initCode)
+    try {
+        eval(initCode)
+    }catch (exc){
+        parler(exc)
+    }
     stepper = setInterval(()=>{
-        eval(stepCode)
+        try {
+            eval(stepCode)
+        }catch (exc){
+            parler(exc)
+        }
         modifierValeur("TOUCHE" ,TOUCHE.aucune)
     },stepperTimer);
 }
@@ -120,5 +128,5 @@ jQuery(document).ready(function(){
         editorReference[tabNameHidden].toTextArea()
         delete editorReference[tabNameHidden]
     })
-    tailleAffichage(70,30)
+    tailleAffichage(50,30)
 })

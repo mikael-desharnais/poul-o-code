@@ -6,50 +6,59 @@ function tailleAffichage(largeur,hauteur){
     HAUTEUR = hauteur
     effacerAffichage()
 }
+function aleatoire(debut,fin,except=null){
+    var toReturn = 0
+    do {
+        toReturn = Math.floor((Math.random() * (fin-debut+1)) + debut)
+    }while(except==null||except==toReturn)
+    return toReturn
+}
 function effacerAffichage(){
     display = []
     colorDisplay = []
     for(var i = 0;i<HAUTEUR;i++){
-        display.push("");
+        display.push([]);
         colorDisplay.push([]);
         for(var j = 0;j<LARGEUR;j++){
-            display[i]+=DESSIN.vide;
+            display[i].push(DESSIN.vide);
             colorDisplay[i].push(COULEUR.noir);
         }
     }
     afficher()
 }
-function changeAffichage(x,y,chr,color=false,updateDisplay=true){
+function changerAffichage(x,y,chr,color=false,updateDisplay=true){
     x = x-1
     y = y-1
     if (color!==false){
         colorDisplay[y][x]=color;
     }
-    display[y]=display[y].substring(0,x)+chr+display[y].substring(x+1);
+    display[y][x]=chr;
     if (updateDisplay){
         afficher();
     }
 }
 function afficher(){
-    var content = DESSIN.plein.repeat(display[0].length+2)+"\n"
+    var blackBlock = DESSIN.plein.replace('%color%',COULEUR.noir)
+    var content = ('<span class="pixel">'+blackBlock+"</span>").repeat(display[0].length+2)+'<br class="clearer"/>'
     for(var y = 0;y<display.length;y++){
-        content+=DESSIN.plein
+        content+='<span class="pixel">'+blackBlock+"</span>"
         for(var x = 0;x<display[y].length;x++){
-            if (colorDisplay[y][x]!="black"){
-                content+="<span style=\"color : "+colorDisplay[y][x]+"\">"+display[y][x]+"</span>"
-            }else {
-                content+=display[y][x]
+            var pixelContent = ""
+            if (display[y][x].indexOf("%color%")===-1){
+                display[y][x] = '<span class="pixel" style="color : %color%">'+display[y][x]+'</span>'
             }
+            pixelContent+=display[y][x].replace('%color%',colorDisplay[y][x])
+            pixelContent = '<span class="pixel">'+pixelContent+"</span>"
+            content+=pixelContent
         }
-        content+=DESSIN.plein
-        content+="\n"
+        content+='<span class="pixel">'+blackBlock+'</span><br class="clearer"/>'
      }
-    content+= DESSIN.plein.repeat(display[0].length+2)
+    content+= ('<span class="pixel">'+blackBlock+"</span>").repeat(display[0].length+2)
 
     jQuery('.block-display').html(content)
 }
-function parler(txt){
-    var node = jQuery("<div></div>");
+function parler(txt,couleur=COULEUR.noire){
+    var node = jQuery("<div style=\"color : "+couleur+"\"></div>");
     node.html("> INFO : "+txt);
     jQuery(".block-log").prepend(node);
     logHistory.unshift({ "node" : node, "txt" : txt})
@@ -92,9 +101,9 @@ function rectangle(x,y,height,width,outer=DESSIN.plein,inner=DESSIN.vide,colorOu
     for(var i=0;i<width;i++){
         for(var j=0;j<height;j++){
             if (i==0||j==0||i==width-1||j==height-1){
-                changeAffichage(x+i,y+j,outer,colorOuter,false)
+                changerAffichage(x+i,y+j,outer,colorOuter,false)
             }else {
-                changeAffichage(x+i,y+j,inner,colorInner,false)
+                changerAffichage(x+i,y+j,inner,colorInner,false)
             }
         }
     }
@@ -103,8 +112,10 @@ function rectangle(x,y,height,width,outer=DESSIN.plein,inner=DESSIN.vide,colorOu
 
 
 var DESSIN = {
-    plein : "A",
-    vide : lettre(160)
+    plein : '<span class="pixel" style="background : %color%"></span>',
+    vide : " ",
+    coeur : "&hearts;",
+    bateau : "⛴"
 }
 var COULEUR = {
     noir : "black",
