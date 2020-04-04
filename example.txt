@@ -1,0 +1,77 @@
+// Début
+
+creerValeur("colSerpent",2)
+creerValeur("ligneSerpent",2)
+creerValeur("colMouvementSerpent",0)
+creerValeur("ligneMouvementSerpent",1)
+creerValeur("coeur",1)
+creerValeur("colCoeur",aleatoire(1,LARGEUR,lireValeur("colSerpent")))
+creerValeur("ligneCoeur",aleatoire(1,HAUTEUR,lireValeur("ligneSerpent")))
+
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bateau)
+
+changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
+
+// Répétition
+
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.vide)
+
+si(lireValeur("TOUCHE")==TOUCHE.haut)
+  .alors(()=>{ 	modifierValeur("colMouvementSerpent",0)
+              	modifierValeur("ligneMouvementSerpent",-1)
+             })
+si(lireValeur("TOUCHE")==TOUCHE.bas)
+  .alors(()=>{ 	modifierValeur("colMouvementSerpent",0)
+              	modifierValeur("ligneMouvementSerpent",1)
+             })
+si(lireValeur("TOUCHE")==TOUCHE.gauche)
+  .alors(()=>{ 	modifierValeur("colMouvementSerpent",-1)
+              	modifierValeur("ligneMouvementSerpent",0)
+             })
+si(lireValeur("TOUCHE")==TOUCHE.droite)
+  .alors(()=>{ 	modifierValeur("colMouvementSerpent",1)
+              	modifierValeur("ligneMouvementSerpent",0)
+             })
+
+modifierValeur("colSerpent",lireValeur("colSerpent")+lireValeur("colMouvementSerpent"))
+modifierValeur("ligneSerpent",lireValeur("ligneSerpent")+lireValeur("ligneMouvementSerpent"))
+
+
+si(lireValeur("colSerpent")==0)
+.alors(()=>{
+  parler("PERDU",COULEUR.rouge)
+  stop()
+})
+si(lireValeur("colSerpent")>LARGEUR)
+.alors(()=>{
+  parler("PERDU",COULEUR.rouge)
+  stop()
+})
+si(lireValeur("ligneSerpent")==0)
+.alors(()=>{
+  parler("PERDU",COULEUR.rouge)
+  stop()
+})
+si(lireValeur("ligneSerpent")>HAUTEUR)
+.alors(()=>{
+  parler("PERDU",COULEUR.rouge)
+  stop()
+})
+
+si(lireValeur("colSerpent")==lireValeur("colCoeur"))
+  .alors(()=>{
+  	si(lireValeur("ligneSerpent")==lireValeur("ligneCoeur"))
+  		.alors(()=>{
+      		modifierValeur("colCoeur",aleatoire(1,LARGEUR,lireValeur("colSerpent")))
+          	modifierValeur("ligneCoeur",aleatoire(1,HAUTEUR,lireValeur("ligneSerpent")))
+          	changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
+      		modifierValeur("coeur",lireValeur("coeur")+1)
+      		parler("Bravo : "+lireValeur("coeur"))
+      		si(lireValeur("coeur")==10)
+      		.alors(()=>{
+                parler("Gagné !!!",COULEUR.vert)
+              	stop()
+            })
+    	})
+})
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bateau)
