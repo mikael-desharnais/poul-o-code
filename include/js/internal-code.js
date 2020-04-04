@@ -8,7 +8,7 @@ var store = {}
 var stepper
 
 var started = false
-var stepperTimer = 1000
+var stepperTimer = 200
 
 function clearLog(){
     logHistory.length = 0
@@ -60,7 +60,7 @@ async function initDB(){
     }catch(exc){
     }
     if (savedContent==null){
-        localStorage.setItem("code",JSON.stringify({ "init" : "", "step" : "", timer : 1000 }))
+        localStorage.setItem("code",JSON.stringify({ "init" : "", "step" : "", timer : stepperTimer }))
         savedContent = JSON.parse(localStorage.getItem("code"))
     }
     jQuery('#init').val(savedContent.init)
