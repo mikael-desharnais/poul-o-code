@@ -1,0 +1,36 @@
+// Début
+creerValeur("colSerpent",2)
+creerValeur("ligneSerpent",2)
+creerValeur("colMouvementSerpent",1)
+creerValeur("ligneMouvementSerpent",1)
+
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bateau)
+
+//Répétition
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.vide)
+
+modifierValeur("colSerpent",lireValeur("colSerpent")+lireValeur("colMouvementSerpent"))
+modifierValeur("ligneSerpent",lireValeur("ligneSerpent")+lireValeur("ligneMouvementSerpent"))
+
+si(lireValeur("colSerpent")==0)
+.alors(()=>{
+  modifierValeur("colSerpent",1)
+  modifierValeur("colMouvementSerpent",1)
+})
+si(lireValeur("colSerpent")>LARGEUR)
+.alors(()=>{
+  modifierValeur("colSerpent",LARGEUR)
+  modifierValeur("colMouvementSerpent",-1)
+})
+si(lireValeur("ligneSerpent")==0)
+.alors(()=>{
+  modifierValeur("ligneSerpent",1)
+  modifierValeur("ligneMouvementSerpent",1)
+})
+si(lireValeur("ligneSerpent")>HAUTEUR)
+.alors(()=>{
+  modifierValeur("ligneSerpent",HAUTEUR)
+  modifierValeur("ligneMouvementSerpent",-1)
+})
+
+changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bateau)

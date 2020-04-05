@@ -4,6 +4,24 @@ function lettre(code){
 function tailleAffichage(largeur,hauteur){
     LARGEUR = largeur
     HAUTEUR = hauteur
+    display = []
+    colorDisplay = []
+    var blackBlock = DESSIN.plein.replace('%color%',COULEUR.noir)
+    var blockDisplay = jQuery('.block-display')
+    blockDisplay.append(('<span class="pixel">'+blackBlock+"</span>").repeat(LARGEUR+2)+'<br class="clearer"/>');
+    for(var i = 0;i<HAUTEUR;i++){
+        display.push([]);
+        colorDisplay.push([]);
+        blockDisplay.append('<span class="pixel">'+blackBlock+"</span>")
+        for(var j = 0;j<LARGEUR;j++){
+            var element = jQuery('<span class="pixel">'+DESSIN.vide+'</span>')
+            display[i].push(element)
+            colorDisplay[i].push(COULEUR.noir)
+            jQuery('.block-display').append(element)
+        }
+        blockDisplay.append('<span class="pixel">'+blackBlock+'</span><br class="clearer"/>')
+    }
+    blockDisplay.append(('<span class="pixel">'+blackBlock+"</span>").repeat(LARGEUR+2)+'<br class="clearer"/>');
     effacerAffichage()
 }
 function aleatoire(debut,fin,except=null){
@@ -14,48 +32,33 @@ function aleatoire(debut,fin,except=null){
     return toReturn
 }
 function effacerAffichage(){
-    display = []
-    colorDisplay = []
     for(var i = 0;i<HAUTEUR;i++){
-        display.push([]);
-        colorDisplay.push([]);
         for(var j = 0;j<LARGEUR;j++){
-            display[i].push(DESSIN.vide);
-            colorDisplay[i].push(COULEUR.noir);
+            changerAffichage(j+1,i+1,DESSIN.vide,COULEUR.noir)
         }
     }
-    afficher()
 }
-function changerAffichage(x,y,chr,color=false,updateDisplay=true){
+function changerAffichage(x,y,chr,color=false){
+    if (x<1||y<1||x>LARGEUR||y>HAUTEUR){
+        throw new Error(ERREUR.HORS_DU_CADRE+" ("+x+";"+y+")")
+    }
     x = x-1
     y = y-1
     if (color!==false){
         colorDisplay[y][x]=color;
     }
-    display[y][x]=chr;
-    if (updateDisplay){
-        afficher();
-    }
-}
-function afficher(){
-    var blackBlock = DESSIN.plein.replace('%color%',COULEUR.noir)
-    var content = ('<span class="pixel">'+blackBlock+"</span>").repeat(display[0].length+2)+'<br class="clearer"/>'
-    for(var y = 0;y<display.length;y++){
-        content+='<span class="pixel">'+blackBlock+"</span>"
-        for(var x = 0;x<display[y].length;x++){
-            var pixelContent = ""
-            if (display[y][x].indexOf("%color%")===-1){
-                display[y][x] = '<span class="pixel" style="color : %color%">'+display[y][x]+'</span>'
-            }
-            pixelContent+=display[y][x].replace('%color%',colorDisplay[y][x])
-            pixelContent = '<span class="pixel">'+pixelContent+"</span>"
-            content+=pixelContent
-        }
-        content+='<span class="pixel">'+blackBlock+'</span><br class="clearer"/>'
-     }
-    content+= ('<span class="pixel">'+blackBlock+"</span>").repeat(display[0].length+2)
 
-    jQuery('.block-display').html(content)
+    if (chr.indexOf("%color%")===-1){
+        chr = '<span class="pixel" style="color : %color%">'+chr+'</span>'
+    }
+    display[y][x].html(chr.replace('%color%',colorDisplay[y][x]))
+}
+function changerRepetition(time){
+    stepperTimer = time
+    if (stepper!=null){
+        clearInterval(stepper)
+        stepper = setInterval(timerFunction,stepperTimer);
+    }
 }
 function parler(txt,couleur=COULEUR.noire){
     var node = jQuery("<div style=\"color : "+couleur+"\"></div>");
@@ -72,9 +75,9 @@ function parler(txt,couleur=COULEUR.noire){
 
 function si(condition){
     if (condition){
-        return { alors : function(code){ code(); return this;  }, sinon : function(code) { return this; } }
+        return { alors : function(code){ code(); return this;  }, sinon : function(code) { return this; }, et : function(cond){ return si(cond) }, ou : function(cond){ return si(true) }  }
     }else {
-        return { alors : function(code){ return this }, sinon : function(code) { code(); return this; } }
+        return { alors : function(code){ return this }, sinon : function(code) { code(); return this; },  et : function(cond){ return si(false) }, ou : function(cond){ return si(cond) }   }
     }
 }
 function de(start){
@@ -120,7 +123,8 @@ var DESSIN = {
 var COULEUR = {
     noir : "black",
     rouge : "red",
-    bleu : "blue"
+    bleu : "blue",
+    vert : "green"
 }
 
 var REV_TOUCHE = {
@@ -129,6 +133,10 @@ var REV_TOUCHE = {
     40 : "bas",
     37 : "gauche",
     39 : "droite"
+}
+
+var ERREUR = {
+    HORS_DU_CADRE : "Les coordonnées sont hors de l'écran"
 }
 
 var TOUCHE = {}

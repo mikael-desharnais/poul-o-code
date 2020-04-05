@@ -2,10 +2,10 @@ var display = []
 var colorDisplay = []
 var logHistory = []
 var LOG_LENGTH = 100
-
+var latestTouche = null
 
 var store = {}
-var stepper
+var stepper = null
 
 var started = false
 var stepperTimer = 200
@@ -14,6 +14,8 @@ function clearLog(){
     logHistory.length = 0
     jQuery('.block-log').empty()
 }
+
+var timerFunction = ()=>{}
 
 function run(){
     started = true
@@ -30,25 +32,38 @@ function run(){
     }catch (exc){
         parler(exc)
     }
-    stepper = setInterval(()=>{
+    timerFunction = ()=>{
+        console.log(started)
         try {
             eval(stepCode)
         }catch (exc){
-            parler(exc)
+            if (exc!=null){
+                parler(exc)
+            }
         }
-        modifierValeur("TOUCHE" ,TOUCHE.aucune)
-    },stepperTimer);
+        if (latestTouche!=null){
+            TOUCHE[latestTouche]=false
+        }
+
+    }
+    stepper = setInterval(timerFunction,stepperTimer);
 }
 function stop(){
     started = false
     jQuery("#stop").hide()
     jQuery("#run").show()
     clearInterval(stepper)
+    stepper = null
+    throw null;
 
 }
 $(document).delegate('body', 'keydown', function(e) {
     if (typeof REV_TOUCHE[e.which] != "undefined"){
-        modifierValeur("TOUCHE",REV_TOUCHE[e.which])
+        if (latestTouche!=null){
+            TOUCHE[latestTouche]=false
+        }
+        TOUCHE[REV_TOUCHE[e.which]]=true
+        latestTouche = REV_TOUCHE[e.which]
     }
 });
 
@@ -89,7 +104,7 @@ function changeTimer(diff){
 jQuery(document).ready(function(){
     initDB()
     for(i in REV_TOUCHE){
-        TOUCHE[REV_TOUCHE[i]]=REV_TOUCHE[i]
+        TOUCHE[REV_TOUCHE[i]]=false
     }
     jQuery("#run").click(function(){
         run()

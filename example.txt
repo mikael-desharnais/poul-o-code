@@ -4,7 +4,7 @@ creerValeur("colSerpent",2)
 creerValeur("ligneSerpent",2)
 creerValeur("colMouvementSerpent",0)
 creerValeur("ligneMouvementSerpent",1)
-creerValeur("coeur",1)
+creerValeur("coeur",0)
 creerValeur("colCoeur",aleatoire(1,LARGEUR,lireValeur("colSerpent")))
 creerValeur("ligneCoeur",aleatoire(1,HAUTEUR,lireValeur("ligneSerpent")))
 
@@ -12,23 +12,25 @@ changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bate
 
 changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
 
+stepperTimer = 50
+
 // Répétition
 
 changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.vide)
 
-si(lireValeur("TOUCHE")==TOUCHE.haut)
+si(TOUCHE.haut)
   .alors(()=>{ 	modifierValeur("colMouvementSerpent",0)
               	modifierValeur("ligneMouvementSerpent",-1)
              })
-si(lireValeur("TOUCHE")==TOUCHE.bas)
+si(TOUCHE.bas)
   .alors(()=>{ 	modifierValeur("colMouvementSerpent",0)
               	modifierValeur("ligneMouvementSerpent",1)
              })
-si(lireValeur("TOUCHE")==TOUCHE.gauche)
+si(TOUCHE.gauche)
   .alors(()=>{ 	modifierValeur("colMouvementSerpent",-1)
               	modifierValeur("ligneMouvementSerpent",0)
              })
-si(lireValeur("TOUCHE")==TOUCHE.droite)
+si(TOUCHE.droite)
   .alors(()=>{ 	modifierValeur("colMouvementSerpent",1)
               	modifierValeur("ligneMouvementSerpent",0)
              })
@@ -52,6 +54,7 @@ si(lireValeur("ligneSerpent")==0)
   parler("PERDU",COULEUR.rouge)
   stop()
 })
+
 si(lireValeur("ligneSerpent")>HAUTEUR)
 .alors(()=>{
   parler("PERDU",COULEUR.rouge)
