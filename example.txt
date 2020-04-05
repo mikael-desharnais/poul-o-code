@@ -12,7 +12,8 @@ changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bate
 
 changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
 
-stepperTimer = 50
+creerValeur("repetition",250)
+changerRepetition(lireValeur("repetition"))
 
 // Répétition
 
@@ -40,41 +41,29 @@ modifierValeur("ligneSerpent",lireValeur("ligneSerpent")+lireValeur("ligneMouvem
 
 
 si(lireValeur("colSerpent")==0)
-.alors(()=>{
-  parler("PERDU",COULEUR.rouge)
-  stop()
-})
-si(lireValeur("colSerpent")>LARGEUR)
-.alors(()=>{
-  parler("PERDU",COULEUR.rouge)
-  stop()
-})
-si(lireValeur("ligneSerpent")==0)
-.alors(()=>{
-  parler("PERDU",COULEUR.rouge)
-  stop()
-})
-
-si(lireValeur("ligneSerpent")>HAUTEUR)
+.ou(lireValeur("colSerpent")>LARGEUR)
+.ou(lireValeur("ligneSerpent")==0)
+.ou(lireValeur("ligneSerpent")>HAUTEUR)
 .alors(()=>{
   parler("PERDU",COULEUR.rouge)
   stop()
 })
 
 si(lireValeur("colSerpent")==lireValeur("colCoeur"))
+  .et(lireValeur("ligneSerpent")==lireValeur("ligneCoeur"))
   .alors(()=>{
-  	si(lireValeur("ligneSerpent")==lireValeur("ligneCoeur"))
-  		.alors(()=>{
-      		modifierValeur("colCoeur",aleatoire(1,LARGEUR,lireValeur("colSerpent")))
-          	modifierValeur("ligneCoeur",aleatoire(1,HAUTEUR,lireValeur("ligneSerpent")))
-          	changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
-      		modifierValeur("coeur",lireValeur("coeur")+1)
-      		parler("Bravo : "+lireValeur("coeur"))
-      		si(lireValeur("coeur")==10)
-      		.alors(()=>{
-                parler("Gagné !!!",COULEUR.vert)
-              	stop()
-            })
-    	})
+    modifierValeur("colCoeur",aleatoire(1,LARGEUR,lireValeur("colSerpent")))
+    modifierValeur("ligneCoeur",aleatoire(1,HAUTEUR,lireValeur("ligneSerpent")))
+    changerAffichage(lireValeur("colCoeur"),lireValeur("ligneCoeur"),DESSIN.coeur)
+    modifierValeur("coeur",lireValeur("coeur")+1)
+  	modifierValeur("repetition",lireValeur("repetition")-10)
+	changerRepetition(lireValeur("repetition"))
+    parler("Bravo : "+lireValeur("coeur"))
+    si(lireValeur("coeur")==10)
+      .alors(()=>{
+      parler("Gagné !!!",COULEUR.vert)
+      effacerAffichage()
+      stop()
+    })
 })
 changerAffichage(lireValeur("colSerpent"),lireValeur("ligneSerpent"),DESSIN.bateau)
