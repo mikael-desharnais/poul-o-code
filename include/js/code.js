@@ -41,6 +41,7 @@ function effacerAffichage(){
 }
 ////
 function changerAffichage(x,y,chr,color=false){
+    chr = chr+""
     if (x<1||y<1||x>LARGEUR||y>HAUTEUR){
         throw new Error(ERREUR.HORS_DU_CADRE+" ("+x+";"+y+")")
     }
