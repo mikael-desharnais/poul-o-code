@@ -1,0 +1,14 @@
+// Début
+creerValeur("nombreMistere",aleatoire(1,10))
+
+//Répétition
+
+creerValeur("reponse",demanderNombre("Quel est le nombre mystère ?"))
+si(lireValeur("reponse")==lireValeur("nombreMistere"))
+.alors(()=>{
+  parler("Bravo : c'est gagné !")
+  stop()
+})
+.sinon(()=>{
+  parler("Raté : essaye encore !")
+})

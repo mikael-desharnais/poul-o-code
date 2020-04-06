@@ -24,13 +24,14 @@ function tailleAffichage(largeur,hauteur){
     blockDisplay.append(('<span class="pixel">'+blackBlock+"</span>").repeat(LARGEUR+2)+'<br class="clearer"/>');
     effacerAffichage()
 }
-function aleatoire(debut,fin,except=null){
+function aleatoire(start,end,except=null){
     var toReturn = 0
     do {
-        toReturn = Math.floor((Math.random() * (fin-debut+1)) + debut)
-    }while(except==null||except==toReturn)
+        toReturn = Math.floor((Math.random() * (end-start+0.999)) + start)
+    }while(except!=null&&except==toReturn)
     return toReturn
 }
+////
 function effacerAffichage(){
     for(var i = 0;i<HAUTEUR;i++){
         for(var j = 0;j<LARGEUR;j++){
@@ -38,6 +39,7 @@ function effacerAffichage(){
         }
     }
 }
+////
 function changerAffichage(x,y,chr,color=false){
     if (x<1||y<1||x>LARGEUR||y>HAUTEUR){
         throw new Error(ERREUR.HORS_DU_CADRE+" ("+x+";"+y+")")
@@ -60,6 +62,7 @@ function changerRepetition(time){
         stepper = setInterval(timerFunction,stepperTimer);
     }
 }
+////
 function parler(txt,couleur=COULEUR.noire){
     var node = jQuery("<div style=\"color : "+couleur+"\"></div>");
     node.html("> INFO : "+txt);
@@ -81,23 +84,28 @@ function si(condition){
     }
 }
 function de(start){
-    return { a : function(stop) { return { faire : function(code) { for(var i=start;i<=stop;i++) { code(i) } } } } }
+    var pas = 1;
+    return { tousLes : function(p){ pas = p, return this }, a : function(stop) { return { faire : function(code) { for(var i=start;i<=stop;i+=p) { code(i) } } } } }
 }
-
+////
 function creerValeur(name,value){
     store[name]=value
 }
-
+////
 function modifierValeur(name,value){
     store[name]=value
 }
-
+////
 function lireValeur(name){
     return store[name]
 }
-
+////
 function demander(question){
     return window.prompt(question)
+}
+////
+function demanderNombre(question){
+    return parseFloat(window.prompt(question))
 }
 
 function rectangle(x,y,height,width,outer=DESSIN.plein,inner=DESSIN.vide,colorOuter=false,colorInner=false){
