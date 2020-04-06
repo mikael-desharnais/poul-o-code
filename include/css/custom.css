@@ -36,8 +36,6 @@
 .pixel{
     display : block;
     float : left;
-    width : 16px;
-    height : 16px;
     text-align : center;
     vertical-align: middle;
 }
@@ -49,5 +47,5 @@
 }
 #init-tab,#step-tab,.CodeMirror{
     width : 100%;
-    height : 95%;
+    height : 92%;
 }

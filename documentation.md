@@ -4,6 +4,8 @@ Le but de Poul-o-code est d'apporter aux apprentis développeurs, un moyen de cr
 * En français
 * Avec une interface simple
 
+*Tout est en français sauf parfois quelques erreurs qui viennent de loin. Tous les accents sont supprimés*
+
 ## L'interface
 L'interface est découpée en trois partie :
 * L'écran (en haut à gauche) :<br/>
@@ -202,5 +204,115 @@ On peut utiliser les comparaisons suivantes :
 c'est un peu compliqué mais obligatoire ici.
 
 ### faire une action pour une suite de nombre
+Nous allons afficher tous les nombres de 1 à 20 dans la partie Débug.
 
-Si on veut 
+Écrivez le code suivant dans l'onglet Début, puis cliquez sur Démarrer.
+
+```
+de(1).a(10).faire((compteur)=>{
+    parler(compteur)
+})
+```
+
+On retrouve un peu ces caractères bizarres après le faire mais cette fois, on a le mot compteur entre les parenthèses. Comme on le voit, compteur contient l'information de chaque nombre entre 1 et 10 et l'action parler est appelée 10 fois (une fois pour chaque nombre) avec à chaque fois une valeur de compteur différente.
+
+Si on veut aller de deux en deux :
+
+```
+de(1).a(10).tousLes(2).faire((compteur)=>{
+    parler(compteur)
+})
+```
+
+On aura alors 1,3,5,7,9
+
+### Quelle touche a été appuyée
+Les programmes et les jeux poule-o-code sont de vieux programmes, il ne savent utiliser que le clavier.
+
+Nous allons faire un programme qui affiche un message à chaque fois que l'on appuie sur la touche flèche du bas.
+
+Écrivez le code suivant dans l'onglet Répétition, puis cliquez sur Démarrer.
+```
+si(TOUCHE.bas)
+.alors(()=>{
+    parler("Vous avez appuyé sur bas")
+})
+```
+
+On peut faire de même avec toutes les touches directionnelles et quelques autres touches :
+* TOUCHE.bas
+* TOUCHE.haut
+* TOUCHE.gauche
+* TOUCHE.droite
+* TOUCHE.entree
+* TOUCHE.espace
+* TOUCHE.echap
+
+### Arrêter le programme
+Pour arrêter le programme, le joueur peut cliquer sur le bouton arrêter mais le programme peut aussi décider de s'arrêter seul. Il existe l'action stop à utiliser comme cela :
+
+```
+stop()
+```
+
+### Accélérer ou ralentir le jeu
+Pour accélérer ou ralentir le jeu, on peut utiliser l'action changerRepetition de la façon suivante :
+
+```
+changerRepetition(500)
+```
+
+La valeur 500 correspond à un nombre de millisecondes (il faut 1000ms pour faire une seconde, on a donc une demi seconde). Dans ce cas, le jeu ira deux fois plus vite puisqu'il fera deux répétition par seconde. On peut changer la vitesse du jeu à tout instant.
+
+### Et des exemples
+* [Un petit jeu type serpent (mais avec un bateau)](./example.txt)
+* [Une balle qui rebondi sur les bords](./example2.txt)
+* [Un jeu du nombre mystère](./example3.txt)
+
+Les fichiers d'exemple contiennent deux parties (début et répétition), à vous de copier le code dans les bons onglets.
+
+### Liste des couleurs disponibles
+Pour être utilisés, tous les noms de couleur doivent être préfixés par COULEUR.
+
+noir ,rouge ,vert ,blanc ,argent ,gris ,marron ,jaune ,vertFluo ,vert ,bleuFluo ,bleu ,violet ,fuchsia : "fuchsia",
+
+Exemple de bateau Bleu Fluo :
+
+```
+changerAffichage(6,10,DESSIN.bateau,COULEUR.bleuFluo)
+```
+
+### Liste des caractères disponibles
+
+- montagne : ⛰
+- camion : ⛟
+- ballon : ⚽
+- ancre : ⚓
+- epee : ⚔
+- note : ♪
+- echecPion : ♟
+- echecFou : ♝
+- echecTour : ♜
+- echecCavalier : ♞
+- echecRoi : ♚
+- echecReine : ♛
+- smileyTriste : ☹
+- smiley : ☺
+- nucleaire : ☢
+- etoile : ★
+- nuage : ☁
+- soleil : ☀
+- triangle : ▴
+- point : ●
+- flecheNordOuest : ⇖
+- flecheOuest : ⇐
+- flecheSudOuest : ⇙
+- flecheSud : ⇓
+- flecheSudEst : ⇘
+- flecheEst : ⇒
+- flecheNordEst : ⇗
+- flecheNord : ⇑
+- bateau : ⛴
+- coeur : ♥
+- vide :
+- plein : █

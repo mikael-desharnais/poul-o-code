@@ -3,6 +3,8 @@ var colorDisplay = []
 var logHistory = []
 var LOG_LENGTH = 100
 var latestTouche = null
+var DEFAULT_WIDTH=50
+var DEFAULT_HEIGHT=30
 
 var store = {}
 var stepper = null
@@ -122,6 +124,10 @@ jQuery(document).ready(function(){
         var diff = jQuery(this).data()
         changeTimer(diff)
     })
+    $(window).resize(function() {
+        var pixelSize = Math.floor(Math.min(jQuery('.block-display').width()/(DEFAULT_WIDTH+2)),jQuery('.block-display').height()/(DEFAULT_HEIGHT+2))
+        jQuery('#stylePixel').text('.pixel { width : '+pixelSize+'px; height :'+pixelSize+'px; }')
+    })
     jQuery('.active.tab-pane .code').each(function(){
         var editorName="#"+jQuery(this).closest('.tab-pane').attr('id')
         editorReference[editorName] = CodeMirror.fromTextArea(jQuery(this)[0], {
@@ -143,5 +149,6 @@ jQuery(document).ready(function(){
         editorReference[tabNameHidden].toTextArea()
         delete editorReference[tabNameHidden]
     })
-    tailleAffichage(50,30)
+    tailleAffichage(DEFAULT_WIDTH,DEFAULT_HEIGHT)
+    $(window).resize()
 })

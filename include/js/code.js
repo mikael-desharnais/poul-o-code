@@ -75,7 +75,7 @@ function parler(txt,couleur=COULEUR.noire){
         logHistory.length = LOG_LENGTH
     }
 }
-
+////
 function si(condition){
     if (condition){
         return { alors : function(code){ code(); return this;  }, sinon : function(code) { return this; }, et : function(cond){ return si(cond) }, ou : function(cond){ return si(true) }  }
@@ -83,9 +83,10 @@ function si(condition){
         return { alors : function(code){ return this }, sinon : function(code) { code(); return this; },  et : function(cond){ return si(false) }, ou : function(cond){ return si(cond) }   }
     }
 }
+////
 function de(start){
     var pas = 1;
-    return { tousLes : function(p){ pas = p, return this }, a : function(stop) { return { faire : function(code) { for(var i=start;i<=stop;i+=p) { code(i) } } } } }
+    return { a : function(stop) { return { tousLes : function(p){ pas = p; return this }, faire : function(code) { for(var i=start;i<=stop;i+=pas) { code(i) } } } } }
 }
 ////
 function creerValeur(name,value){
@@ -126,13 +127,52 @@ var DESSIN = {
     plein : '<span class="pixel" style="background : %color%"></span>',
     vide : " ",
     coeur : "&hearts;",
-    bateau : "⛴"
+    bateau : "⛴",
+    flecheNord : "⇑",
+    flecheNordEst : "⇗",
+    flecheEst : "⇒",
+    flecheSudEst : "⇘",
+    flecheSud : "⇓",
+    flecheSudOuest : "⇙",
+    flecheOuest : "⇐",
+    flecheNordOuest : "⇖",
+    point : "●",
+    triangle : "▴",
+    soleil : "☀",
+    nuage : "☁",
+    etoile : "★",
+    nucleaire : "☢",
+    smiley : "☺",
+    smileyTriste : "☹",
+    echecReine : "♛",
+    echecRoi : "♚",
+    echecCavalier : "♞",
+    echecTour : "♜",
+    echecFou : "♝",
+    echecPion : "♟",
+    note : "♪",
+    epee : "⚔",
+    ancre : "⚓",
+    ballon : "⚽",
+    camion : "⛟",
+    montagne : "⛰"
+
 }
 var COULEUR = {
     noir : "black",
     rouge : "red",
+    vert : "green",
+    blanc : "white",
+    argent : "lightGray",
+    gris : "darkGray",
+    marron : "maroon",
+    jaune : "yellow",
+    vertFluo : "lime",
+    vert : "green",
+    bleuFluo : "cyan",
     bleu : "blue",
-    vert : "green"
+    violet : "purple",
+    fuchsia : "fuchsia",
 }
 
 var REV_TOUCHE = {
@@ -140,7 +180,10 @@ var REV_TOUCHE = {
     38 : "haut",
     40 : "bas",
     37 : "gauche",
-    39 : "droite"
+    39 : "droite",
+    13 : "entree",
+    32 : "espace",
+    27 : "echap"
 }
 
 var ERREUR = {
