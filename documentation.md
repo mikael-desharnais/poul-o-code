@@ -9,7 +9,7 @@ Le but de Poul-o-code est d'apporter aux apprentis développeurs, un moyen de cr
 ## J'ai besoin d'aide
 Si vous avez besoin d'aide, contactez celui qui vous a conseillé poul-o-code. Ya pas idée de laisser les débutants tout seuls !
 
-## Si je créer un programme, où s'enregistre t-il ?
+## Si je crée un programme, où s'enregistre t-il ?
 Pour l'instant, le dernier programme est enregistré dans le navigateur web et y reste. Si vous voulez en créer un autre, il vous faudra le sauvegarder (Début et Répétition) dans un fichier sur votre ordinateur.
 
 Plus tard, poul-o-code pourrait bien avoir plus de plumes à son arc et avoir de quoi stocker de nombreux programmes (patience...)
@@ -145,7 +145,7 @@ creerValeur("ageJoueur",demanderNombre("Hola mon brave, quel est ton age ?"))
 parler("Bonjour "+lireValeur("nomJoueur")+", tu as "+lireValeur("ageJoueur")+" ans")
 ```
 
-On voit que nous avons utiliser l'action creerValeur pour créer une valeur et y mettre le résultat de l'action demander. Ensuite nous avons utiliser l'action lireValeur pour récupérer le contenu de la valeur.
+On voit que nous avons utilisé l'action creerValeur pour créer une valeur et y mettre le résultat de l'action demander. Ensuite nous avons utiliser l'action lireValeur pour récupérer le contenu de la valeur.
 
 Il est aussi possible de modifier une valeur en utilisant l'action modifierValeur. Par exemple, nous pouvons vieillir de 5 ans notre joueur :
 
@@ -282,7 +282,7 @@ Les fichiers d'exemple contiennent deux parties (début et répétition), à vou
 ### Liste des couleurs disponibles
 Pour être utilisés, tous les noms de couleur doivent être préfixés par COULEUR.
 
-noir ,rouge ,vert ,blanc ,argent ,gris ,marron ,jaune ,vertFluo ,vert ,bleuFluo ,bleu ,violet ,fuchsia : "fuchsia",
+noir ,rouge ,vert ,blanc ,argent ,gris ,marron ,jaune ,vertFluo ,vert ,bleuFluo ,bleu ,violet ,fuchsia
 
 Exemple de bateau Bleu Fluo :
 

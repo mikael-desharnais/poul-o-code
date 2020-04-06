@@ -32,7 +32,10 @@ function run(){
     try {
         eval(initCode)
     }catch (exc){
-        parler(exc)
+        if (exc!=null){
+            parler(exc)
+        }
+        return;
     }
     timerFunction = ()=>{
         console.log(started)
