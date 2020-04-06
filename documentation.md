@@ -209,7 +209,30 @@ On peut utiliser les comparaisons suivantes :
 })
 ```
 
-c'est un peu compliqué mais obligatoire ici.
+C'est un peu compliqué mais obligatoire ici.
+
+On peut coupler plusieurs conditions. Par exemple, pour tester si on veut tester les jeunes adultes :
+```
+creerValeur("ageJoueur",demanderNombre("Hola mon brave, quel est ton age ?"))
+si(lireValeur("ageJoueur")<=25)
+.et(lireValeur("ageJoueur")>=18)
+.alors(()=>{
+    parler("Tu es jeune mais adulte")
+})
+```
+On utilise ici, l'action **et** pour traiter le alors seulement si les deux conditions sont réunies (<=25 et >=18)
+
+De même, si on veut afficher un message si la personne s'appelle Wallas ou Gromit :
+```
+creerValeur("nomJoueur",demander("Hola mon brave, quel est votre nom ?"))
+si(lireValeur("nomJoueur")=="Wallas")
+.ou(lireValeur("nomJoueur")=="Gromit")
+.alors(()=>{
+    parler("Vous êtes en pâte à modeler")
+})
+```
+On utilise ici, l'action **ou** pour traiter le alors seulement si une des deux conditions est réunie (Wallas ou Gromit)
+
 
 ### faire une action pour une suite de nombre
 Nous allons afficher tous les nombres de 1 à 20 dans la partie Débug.
