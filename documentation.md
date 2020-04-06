@@ -7,12 +7,12 @@ Le but de Poul-o-code est d'apporter aux apprentis développeurs, un moyen de cr
 *Tout est en français sauf parfois quelques erreurs qui viennent de loin. Tous les accents sont supprimés*
 
 ## J'ai besoin d'aide
-Si vous avez besoin d'aide, contactez celui qui vous a conseillé poule-o-code. Ya pas idée de laisser les débutants tout seuls !
+Si vous avez besoin d'aide, contactez celui qui vous a conseillé poul-o-code. Ya pas idée de laisser les débutants tout seuls !
 
 ## Si je créer un programme, où s'enregistre t-il ?
 Pour l'instant, le dernier programme est enregistré dans le navigateur web et y reste. Si vous voulez en créer un autre, il vous faudra le sauvegarder (Début et Répétition) dans un fichier sur votre ordinateur.
 
-Plus tard, poule-o-code pourrait bien avoir plus de plumes à son arc et avoir de quoi stocker de nombreux programmes (patience...)
+Plus tard, poul-o-code pourrait bien avoir plus de plumes à son arc et avoir de quoi stocker de nombreux programmes (patience...)
 
 ## L'interface
 L'interface est découpée en trois partie :
@@ -235,7 +235,7 @@ de(1).a(10).tousLes(2).faire((compteur)=>{
 On aura alors 1,3,5,7,9
 
 ### Quelle touche a été appuyée
-Les programmes et les jeux poule-o-code sont de vieux programmes, il ne savent utiliser que le clavier.
+Les programmes et les jeux poul-o-code sont de vieux programmes, il ne savent utiliser que le clavier.
 
 Nous allons faire un programme qui affiche un message à chaque fois que l'on appuie sur la touche flèche du bas.
 
